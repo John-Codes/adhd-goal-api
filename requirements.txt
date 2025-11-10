@@ -5,4 +5,14 @@ PyPDF2==3.0.1
 reportlab==4.0.4
 pdfplumber==0.10.3
 tkhtmlview==0.3.1
+llama-index
+python-dotenv
+openai
+PyPDF2==3.0.1
+reportlab==4.0.4
+pdfplumber==0.10.3
+tkhtmlview==0.3.1
 markdown==3.5.1
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0

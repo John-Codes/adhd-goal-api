@@ -22,5 +22,21 @@
     "created_date": "2025-11-10T14:14:27.724110",
     "due_date": "2025-11-30",
     "is_active": true
+  },
+  {
+    "id": 3,
+    "name": "Reading Goal Updated",
+    "description": "Read 3 books this month",
+    "created_date": "2025-11-10T15:02:47.620973",
+    "due_date": "2025-12-20",
+    "is_active": true
+  },
+  {
+    "id": 4,
+    "name": "Project Goal",
+    "description": "Complete side project MVP",
+    "created_date": "2025-11-10T15:02:49.668178",
+    "due_date": "2025-11-30",
+    "is_active": false
   }
 ]
