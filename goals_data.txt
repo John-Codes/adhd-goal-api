@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "name": "Fitness Goal",
+    "description": "Run 10k every day",
+    "created_date": "2025-11-10T14:06:08.000225",
+    "is_active": true
+  },
+  {
+    "id": 1,
+    "name": "Reading",
+    "description": "Read 1 book per week",
+    "created_date": "2025-11-10T14:06:08.001024",
+    "is_active": false
+  },
+  {
+    "id": 2,
+    "name": "Learning",
+    "description": "Learn Python in 90 days",
+    "created_date": "2025-11-10T14:06:08.001876",
+    "is_active": true
+  }
+]

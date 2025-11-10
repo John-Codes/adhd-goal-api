@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "name": "Fitness Goal",
+    "description": "Run 4x per week",
+    "created_date": "2025-11-10T14:14:27.722657",
+    "due_date": "2025-12-10",
+    "is_active": true
+  },
+  {
+    "id": 1,
+    "name": "Reading",
+    "description": "Read 2 books this month",
+    "created_date": "2025-11-10T14:14:27.723409",
+    "due_date": "2025-12-15",
+    "is_active": false
+  },
+  {
+    "id": 2,
+    "name": "Project",
+    "description": "Complete side project MVP",
+    "created_date": "2025-11-10T14:14:27.724110",
+    "due_date": "2025-11-30",
+    "is_active": true
+  }
+]
