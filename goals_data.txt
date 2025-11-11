@@ -4,6 +4,7 @@
     "name": "Fitness Goal",
     "description": "Run 10k every day",
     "created_date": "2025-11-10T14:06:08.000225",
+    "goal_type": "Quarter",
     "is_active": true
   },
   {
@@ -11,6 +12,7 @@
     "name": "Reading",
     "description": "Read 1 book per week",
     "created_date": "2025-11-10T14:06:08.001024",
+    "goal_type": "Quarter",
     "is_active": false
   },
   {
@@ -18,6 +20,7 @@
     "name": "Learning",
     "description": "Learn Python in 90 days",
     "created_date": "2025-11-10T14:06:08.001876",
+    "goal_type": "Quarter",
     "is_active": true
   },
   {
@@ -25,6 +28,7 @@
     "name": "Fitness Goal Updated",
     "description": "Run 10k every day",
     "created_date": "2025-11-10T14:56:03.298182",
+    "goal_type": "Quarter",
     "is_active": true
   },
   {
@@ -32,6 +36,7 @@
     "name": "Learning Goal",
     "description": "Learn Python in 90 days",
     "created_date": "2025-11-10T14:56:05.360620",
+    "goal_type": "Quarter",
     "is_active": true
   },
   {
@@ -39,6 +44,7 @@
     "name": "Fitness Goal Updated",
     "description": "Run 10k every day",
     "created_date": "2025-11-10T14:58:19.674040",
+    "goal_type": "Quarter",
     "is_active": true
   },
   {
@@ -46,6 +52,7 @@
     "name": "Learning Goal",
     "description": "Learn Python in 90 days",
     "created_date": "2025-11-10T14:58:21.729233",
+    "goal_type": "Quarter",
     "is_active": true
   },
   {
@@ -53,6 +60,7 @@
     "name": "Fitness Goal Updated",
     "description": "Run 10k every day",
     "created_date": "2025-11-10T15:02:31.308501",
+    "goal_type": "Quarter",
     "is_active": true
   },
   {
@@ -60,6 +68,47 @@
     "name": "Learning Goal",
     "description": "Learn Python in 90 days",
     "created_date": "2025-11-10T15:02:33.336736",
+    "goal_type": "Quarter",
+    "is_active": false
+  },
+  {
+    "id": 9,
+    "name": "Test Goal",
+    "description": "Testing goal_type addition",
+    "created_date": "2025-11-10T15:41:07.858616",
+    "goal_type": "Quarter",
+    "is_active": true
+  },
+  {
+    "id": 10,
+    "name": "Fitness Goal Updated",
+    "description": "Run 10k every day",
+    "created_date": "2025-11-10T15:41:56.884598",
+    "goal_type": "Quarter",
+    "is_active": true
+  },
+  {
+    "id": 11,
+    "name": "Learning Goal",
+    "description": "Learn Python in 90 days",
+    "created_date": "2025-11-10T15:41:58.912571",
+    "goal_type": "Quarter",
+    "is_active": false
+  },
+  {
+    "id": 12,
+    "name": "Fitness Goal Updated",
+    "description": "Run 10k every day",
+    "created_date": "2025-11-10T20:00:44.568115",
+    "goal_type": "Quarter",
+    "is_active": true
+  },
+  {
+    "id": 13,
+    "name": "Learning Goal",
+    "description": "Learn Python in 90 days",
+    "created_date": "2025-11-10T20:00:46.611271",
+    "goal_type": "Quarter",
     "is_active": false
   }
 ]

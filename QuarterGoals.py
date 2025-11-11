@@ -18,6 +18,7 @@ class Goal90:
             "name": name,
             "description": description,
             "created_date": datetime.now().isoformat(),
+            "goal_type": "Quarter",
             "is_active": True
         }
         

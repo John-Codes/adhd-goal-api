@@ -19,6 +19,7 @@ class GoalMonth:
             "description": description,
             "created_date": datetime.now().isoformat(),
             "due_date": due_date or datetime.now().date().isoformat(),
+            "goal_type": "Monthly",
             "is_active": True
         }
         
