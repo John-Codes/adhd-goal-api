@@ -182,7 +182,8 @@ def llm_query_goals(request: LLMChatRequest, current_user=Depends(verify_token))
         # Build context from goals
         chat_history_str = ""
         if request.chat_history:
-            chat_history_str = f"Chat History:\n{json.dumps([{"role": msg.role, "content": msg.content} for msg in request.chat_history], indent=2)}\n"
+            chat_history_data = [{"role": msg.role, "content": msg.content} for msg in request.chat_history]
+            chat_history_str = f"Chat History:\n{json.dumps(chat_history_data, indent=2)}\n"
         
         context = f"""
 You are KISS Coach: a brutal, loving, no-BS ADHD focus enforcer for entrepreneurs.

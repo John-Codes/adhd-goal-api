@@ -8,7 +8,6 @@ python-dotenv
 
 # Database dependencies
 pymongo==4.6.0
-bson
 
 # Authentication and security
 python-jose[cryptography]==3.3.0

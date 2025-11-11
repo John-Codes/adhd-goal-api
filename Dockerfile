@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy only essential requirements first
-COPY requirements_minimal.txt requirements.txt
+COPY requirements.txt .
 
 # Install minimal dependencies
 RUN pip install --no-cache-dir -r requirements.txt
