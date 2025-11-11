@@ -1,1 +1,70 @@
-/.env
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.pipenv/
+*.egg-info/
+dist/
+build/
+
+# FastAPI specific
+*.log
+*.db
+*.sqlite3
+instance/
+*.pem
+*.crt
+*.key
+
+# MongoDB data dumps or local databases
+*.bson
+*.json
+dump/
+data/
+*.lock
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment variables and secrets
+.env
+.env.*
+*.secret
+secrets.json
+
+# Test and coverage outputs
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+.pytest_cache/
+nosetests.xml
+test-results/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+docker-compose.override.yml
+
+# Misc
+*.bak
+*.tmp

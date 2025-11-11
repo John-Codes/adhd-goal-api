@@ -30,9 +30,12 @@ def test_list_goals():
 def test_create_goal():
     print("3. Testing Create Goal...")
     goal_data = {
-        "name": "Test API Goal",
+        "title": "Test API Goal",
         "description": "Testing the cleaned API functionality",
-        "due_date": None
+        "priority": "high",
+        "goal_type": "monthly",
+        "tags": ["test", "api", "validation"],
+        "deadline_days": 30
     }
     response = requests.post(f"{BASE_URL}/api/crud-goals", json=goal_data)
     print(f"Status: {response.status_code}")
@@ -59,9 +62,11 @@ def test_get_goal(goal_id):
 def test_update_goal(goal_id):
     print("5. Testing Update Goal...")
     update_data = {
-        "name": "Updated Test Goal",
+        "title": "Updated Test Goal",
         "description": "Goal has been updated successfully",
-        "due_date": None
+        "priority": "medium",
+        "status": "active",
+        "tags": ["test", "updated", "api"]
     }
     response = requests.put(f"{BASE_URL}/api/crud-goals/{goal_id}", json=update_data)
     print(f"Status: {response.status_code}")

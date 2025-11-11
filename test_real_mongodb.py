@@ -132,15 +132,21 @@ def test_api_end_to_end():
         # CREATE: Test creating goal via API
         print("  - Testing CREATE via API...")
         goal_data = {
-            "name": "API Test Goal - Real MongoDB",
+            "title": "API Test Goal - Real MongoDB",
             "description": "This goal tests real API-to-MongoDB persistence",
-            "due_date": None
+            "priority": "high",
+            "goal_type": "monthly",
+            "tags": ["api", "mongodb", "e2e"],
+            "deadline_days": 30
         }
         create_response = requests.post(f"{BASE_URL}/api/crud-goals", json=goal_data)
         if create_response.status_code == 200:
             create_result = create_response.json()
             goal_id = create_result["goal"]["_id"]
             print(f"  ✓ Goal created via API with ID: {goal_id}")
+            print(f"  ✓ Goal priority: {create_result['goal']['priority']}")
+            print(f"  ✓ Goal type: {create_result['goal']['goalType']}")
+            print(f"  ✓ Goal tags: {create_result['goal']['tags']}")
         else:
             print(f"  ✗ Create via API failed: {create_response.status_code}")
             print(f"  Response: {create_response.text}")
@@ -160,14 +166,18 @@ def test_api_end_to_end():
         # UPDATE: Test updating goal via API
         print("  - Testing UPDATE via API...")
         update_data = {
-            "name": "Updated API Test Goal - Real MongoDB",
+            "title": "Updated API Test Goal - Real MongoDB",
             "description": "This goal has been updated via API",
-            "due_date": None
+            "priority": "medium",
+            "status": "active",
+            "tags": ["updated", "api", "mongodb"]
         }
         update_response = requests.put(f"{BASE_URL}/api/crud-goals/{goal_id}", json=update_data)
         if update_response.status_code == 200:
             updated_goal = update_response.json()["goal"]
             print(f"  ✓ Goal updated via API: {updated_goal['goalTitle']}")
+            print(f"  ✓ New priority: {updated_goal['priority']}")
+            print(f"  ✓ New status: {updated_goal['status']}")
         else:
             print(f"  ✗ Update via API failed: {update_response.status_code}")
             return False
