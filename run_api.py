@@ -13,4 +13,4 @@ if __name__ == "__main__":
     print("❤️  Health check at: http://localhost:8000/api/health")
     print("\nPress Ctrl+C to stop the server")
     
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("fastapi_goals:app", host="0.0.0.0", port=8000, reload=True)
