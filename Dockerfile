@@ -12,14 +12,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application files
 COPY fastapi_goals.py .
-COPY QuarterGoals.py .
-COPY monthly_goals.py .
+COPY goals.py .
 COPY LLM.py .
-COPY goals_data.txt .
-COPY monthly_goals_data.txt .
+COPY mongodb_handler.py .
+COPY run_api.py .
+COPY .env .
 
 # Expose port 8000
 EXPOSE 8000
 
 # Run the FastAPI application
-CMD ["uvicorn", "fastapi_goals:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "run_api.py"]
