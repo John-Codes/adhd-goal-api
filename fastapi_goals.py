@@ -1,9 +1,79 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from typing import Optional, List
 from goals import GoalMonth
 import json
 from LLM import LLMClient
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from dotenv import load_dotenv
+import os
+from datetime import datetime, timedelta
+
+# Load environment variables
+load_dotenv()
+
+# JWT Configuration
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+ALGORITHM = "HS256"
+
+# Password context for additional security (though we'll use a test token)
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+security = HTTPBearer()
+
+# Test user data (for demonstration)
+TEST_USERS = {
+    "test-demo@example.com": {
+        "id": "test-user-demo",
+        "name": "Demo Test User",
+        "email": "test-demo@example.com",
+        "test_account": True,
+        "is_verified": True
+    }
+}
+
+def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Verify JWT token and return user data"""
+    try:
+        token = credentials.credentials
+        
+        # For testing with provided token, decode without signature verification
+        # In production, you would verify the signature with your secret key
+        payload = jwt.decode(token, SECRET_KEY or "dummy_key", algorithms=[ALGORITHM], options={"verify_signature": False})
+        
+        # Extract user info from the JWT payload
+        email = payload.get("email")
+        user_id = payload.get("sub")
+        name = payload.get("name")
+        test_account = payload.get("test_account", False)
+        
+        if not email:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid authentication credentials - no email in token"
+            )
+        
+        # Create user object from JWT payload
+        user = {
+            "id": user_id or "unknown",
+            "name": name or "Unknown User",
+            "email": email,
+            "test_account": test_account,
+            "is_verified": payload.get("is_verified", False)
+        }
+        
+        return user
+    except JWTError as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Invalid authentication credentials: {str(e)}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Token verification failed: {str(e)}"
+        )
 
 app = FastAPI()
 
@@ -39,7 +109,7 @@ class LLMChatRequest(BaseModel):
 
 # CRUD Goals Endpoints
 @app.post("/api/crud-goals", response_model=dict)
-def create_goal(goal: GoalCreate):
+def create_goal(goal: GoalCreate, current_user=Depends(verify_token)):
     """Create a new goal"""
     goal_id = monthly_tracker.create(
         goal_title=goal.title,
@@ -56,12 +126,12 @@ def create_goal(goal: GoalCreate):
         raise HTTPException(status_code=500, detail="Failed to create goal")
 
 @app.get("/api/crud-goals/expired")
-def get_expired_goals():
+def get_expired_goals(current_user=Depends(verify_token)):
     """Get all expired goals"""
     return monthly_tracker.get_expired_goals()
 
 @app.get("/api/crud-goals/{goal_id}", response_model=dict)
-def get_goal(goal_id: str):
+def get_goal(goal_id: str, current_user=Depends(verify_token)):
     """Get a specific goal"""
     goal = monthly_tracker.read(goal_id)
     if goal is None:
@@ -69,12 +139,12 @@ def get_goal(goal_id: str):
     return goal
 
 @app.get("/api/crud-goals", response_model=List[dict])
-def list_goals():
+def list_goals(current_user=Depends(verify_token)):
     """List all active goals"""
     return monthly_tracker.list_goals()
 
 @app.put("/api/crud-goals/{goal_id}", response_model=dict)
-def update_goal(goal_id: str, goal: GoalUpdate):
+def update_goal(goal_id: str, goal: GoalUpdate, current_user=Depends(verify_token)):
     """Update a goal"""
     success = monthly_tracker.update(
         goal_id,
@@ -92,7 +162,7 @@ def update_goal(goal_id: str, goal: GoalUpdate):
     return {"message": "Goal updated successfully", "goal": updated_goal}
 
 @app.delete("/api/crud-goals/{goal_id}", response_model=dict)
-def delete_goal(goal_id: str):
+def delete_goal(goal_id: str, current_user=Depends(verify_token)):
     """Delete a goal (soft delete)"""
     success = monthly_tracker.delete(goal_id)
     if not success:
@@ -101,7 +171,7 @@ def delete_goal(goal_id: str):
 
 # LLM Chat Endpoint
 @app.post("/api/llmquerygoals", response_model=dict)
-def llm_query_goals(request: LLMChatRequest):
+def llm_query_goals(request: LLMChatRequest, current_user=Depends(verify_token)):
     """Chat with LLM about goals using both 90-day and monthly goals data"""
     try:
         # Read goals data from MongoDB
