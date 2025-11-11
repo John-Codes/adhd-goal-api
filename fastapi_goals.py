@@ -34,6 +34,7 @@ class ChatMessage(BaseModel):
 class LLMChatRequest(BaseModel):
     message: str
     model: Optional[str] = None
+    api_key: Optional[str] = None  # Optional OpenRouter API key
     chat_history: Optional[List[ChatMessage]] = None
 
 # CRUD Goals Endpoints
@@ -145,8 +146,8 @@ Monthly Goals:
         # Combine context with user message
         prompt = f"{context}\n\nUser: {request.message}\n\nAssistant:"
         
-        # Initialize LLM client and call with optional model
-        llm_client = LLMClient()
+        # Initialize LLM client with optional API key
+        llm_client = LLMClient(api_key=request.api_key)
         model = request.model or "tngtech/deepseek-r1t2-chimera:free"
         response = llm_client.call_llm(prompt, model=model)
         

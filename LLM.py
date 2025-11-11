@@ -1,5 +1,6 @@
 #llm.py
 import os
+from typing import Optional
 from dotenv import load_dotenv
 from openai import OpenAI
 import logging
@@ -15,13 +16,16 @@ name="tngtech/deepseek-r1t2-chimera:free"
 
 
 class LLMClient:
-    def __init__(self):
+    def __init__(self, api_key: Optional[str] = None):
         """
         Initialize the LLM client with OpenRouter API configuration.
+        
+        Args:
+            api_key: Optional API key. If not provided, will use OPENROUTER_API_KEY from environment.
         """
-        self.api_key = os.getenv("OPENROUTER_API_KEY")
+        self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         if not self.api_key:
-            raise ValueError("OPENROUTER_API_KEY not found in environment variables")
+            raise ValueError("OpenRouter API key not provided and OPENROUTER_API_KEY not found in environment variables")
         
         self.client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
